@@ -90,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='edit'
+  export EDITOR='micro'
 else
   export EDITOR='nvim'
 fi
@@ -115,7 +115,8 @@ export PATH="$PATH:$(yarn global bin)"
 # Created by `pipx` on 2024-06-16 14:11:24
 export PATH="$PATH:/Users/anar/.local/bin"
 alias love="/Applications/love.app/Contents/MacOS/love"
-alias python="/opt/homebrew/bin/python3"
+# alias python="/opt/homebrew/bin/python3"
+alias python="/usr/bin/python3"
 alias see="bat -P --theme base16"
 alias edit="micro"
 alias sql="mycli -u root -R '$fg[yellow]\u:\d ➤ '"
@@ -123,6 +124,15 @@ alias tree="tree -I env"
 alias music="musikcube"
 alias l="gols -c -s -T"
 alias clock="Developer/clock/env/bin/python3 Developer/clock/clock.py"
+alias tt="tt -notheme -quotes en"
+alias cs="cd /Users/anar/Developer/cs310/cs310-Group-Project"
+alias icloud="cd /Users/anar/Library/Mobile\ Documents"
+alias ytdl="yt-dlp --config-locations '/Users/anar/yt-dlp/config'"
+alias gpnr="git pull --no-rebase"
+alias pip="pip3"
+alias math="cd /Users/anar/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/DKU-iCloud/MATH_202"
+
+export PATH="$PATH:/Users/anar/Library/Python/3.9/bin"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/anar/Developer/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -141,8 +151,25 @@ RPROMPT='hi'$RPROMPT
 # echo "QOTD:"&& fortune | toilet -f term
 # echo "____"
 
-eval $(thefuck --alias)
+# eval $(thefuck --alias)
 export PATH=~/path/to/imgcat:$PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
