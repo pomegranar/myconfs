@@ -1,0 +1,13 @@
+{
+    "Alt-/": "lua:comment.comment",
+    "Alt-Left": "WordLeft",
+    "Alt-Right": "WordRight",
+    "Alt-Shift-Backspace": "DeleteLine",
+    "Alt-d": "command:definition",
+    "Alt-f": "command:format",
+    "Alt-k": "command:hover",
+    "Alt-r": "command:references",
+    "CtrlSpace": "command:lspcompletion",
+    "CtrlUnderscore": "lua:comment.comment",
+    "F4": "command:jumptag"
+}

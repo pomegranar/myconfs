@@ -1,0 +1,19 @@
+{
+  "colorscheme": "simple",
+  "lsp.server": "python=pyls,go=gopls,typescript=deno lsp,rust=rust-analyzer,java=jump",
+  "pylsp": {
+      "plugins": {
+        "pylint": {
+          "enabled": true,
+          "args": ["--disable=import-error"]
+        }
+      }
+    },
+  "wordwrap": true,
+  "softwrap": true,
+  "diffgutter": true,
+  "rmtrailingws": true,
+  "savecursor": true,
+  "scrollbar": false,
+  "syntax": true
+}
