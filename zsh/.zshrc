@@ -90,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='micro'
+  export EDITOR='vi'
 else
   export EDITOR='nvim'
 fi
@@ -125,13 +125,10 @@ alias music="musikcube"
 alias l="gols -c -s -T"
 alias clock="Developer/clock/env/bin/python3 Developer/clock/clock.py"
 alias tt="tt -notheme -quotes en"
-alias cs="cd /Users/anar/Developer/cs310/cs310-Group-Project"
 alias icloud="cd /Users/anar/Library/Mobile\ Documents"
 alias ytdl="yt-dlp --config-locations '/Users/anar/yt-dlp/config'"
 alias gpnr="git pull --no-rebase"
 alias pip="pip3"
-alias math="cd /Users/anar/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/DKU-iCloud/MATH_202"
-
 export PATH="$PATH:/Users/anar/Library/Python/3.9/bin"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
