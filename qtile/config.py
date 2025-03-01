@@ -31,7 +31,7 @@ from libqtile.utils import guess_terminal
 from libqtile import extension
 import time
 
-datee = "♥"+str(int((time.time() - 1665259365) // 86400 +1))
+datee = " ♥"+str(int((time.time() - 1665259365) // 86400 +1))+"♥ "
 mod = "mod4"
 terminal = "kitty"
 
@@ -89,7 +89,7 @@ keys = [
     Key([],"XF86AudioPlay",lazy.spawn("playerctl play-pause")),
     Key([mod], 'd', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
-        dmenu_font="Andika-8",
+        dmenu_font="JetBrainsMono Nerd Font Mono",
         background="#15181a",
         foreground="#00ff00",
         selected_background="#079822",
@@ -133,8 +133,8 @@ def init_layout_theme():
     return{
         "margin":0,
         "border_width":1,
-        "border_focus":"#665c54",
-        "border_normal":"#3c3836"
+        "border_focus":"#9c64fe",
+        "border_normal":"#333333"
     }
 
 layout_theme = init_layout_theme()
@@ -143,8 +143,8 @@ def init_layout_theme2():
     return{
         "margin":20,
         "border_width":1,
-        "border_focus":"#665c54",
-        "border_normal":"#3c3836"
+        "border_focus":"#9c64fe",
+        "border_normal":"#333333"
     }
 
 layout_theme2 = init_layout_theme2()
@@ -170,48 +170,47 @@ layouts = [
 
 
 widget_defaults = dict(
-    font="Futura Bk",
+    font="JetBrainsMono Nerd Font Mono",
     fontsize=13,
     padding=10,
-    foreground="#ebdbb2"
+    foreground="#c4c4b5"
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-    	wallpaper='~/Pictures/Wallpapers/gruv-skull.PNG',
+    	wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-eOc8hiK_Z68-unsplash.jpg',
     	wallpaper_mode='fill',
         bottom=bar.Bar(
             
             [
-                widget.GroupBox(highlight_method='line', borderwidth=3, padding=3, this_current_screen_border="#588B75", disable_drag=True, highlight_color=["#282828","#343832"], urgent_border="#fb4934", urgent_text="#1E313D", foreground="#1E313D", hide_unused=True),
+                widget.GroupBox(highlight_method='line', borderwidth=3, padding=3, this_current_screen_border="#9c64fe", disable_drag=True, highlight_color=["#282828","#343832"], urgent_border="#fb4934", urgent_text="#f3005f", foreground="#1E313D", hide_unused=True),
                 widget.CurrentLayout(),
-                widget.Prompt(font="Fantasque Sans Mono"),
+                widget.Prompt(font="JetBrainsMono Nerd Font Mono"),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ff00ff"),
                     },
-                    font="Fantasque Sans Mono",
+                    font="JetBrainsMono Nerd Font Mono",
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.WindowName(max_chars=50,empty_group_string='Pop!_OS'),
+                widget.WindowName(max_chars=50,empty_group_string='Mint'),
                 widget.Spacer(),
-                # widget.TextBox(datee, name="days since first date", padding=0),
-                widget.Clock(format=datee + " %A, %B %d, %Y | %I:%M %p"),
+                widget.Clock(format=datee + " %a, %b %d, %Y | %I:%M %p"),
                 widget.Spacer(),
-                widget.Battery(),
+                # widget.Battery(),
                 widget.Memory(measure_mem='G', format='Mem: {MemUsed: .1f} GB'),
                 widget.Volume(fmt='Vol: {}', update_interval=0.01),
                 # widget.Systray(),
                 # 🟡
                 # 🔴
-                widget.QuickExit(font="Noto Sans", fontsize=20, default_text='⏻︎', countdown_format='{}', padding=2),
-                widget.LaunchBar(font="Noto Sans", fontsize=15, text_only=True, padding=1, progs=[('⏸︎', 'systemctl suspend', 'Suspend system using Systemd')]),
+                widget.QuickExit(fontsize=10, default_text='Logout', countdown_format='{}', padding=2),
+                widget.LaunchBar(fontsize=12, text_only=True, padding=2, progs=[('⏻︎', 'systemctl suspend', 'Suspend system using Systemd')]),
             ],
             24,
-            border_width=[0, 0, 0, 0],  # Draw top and bottom borders
-            border_color=["7c6f64", "7c6f64", "7c6f64", "7c6f64"],  # Borders are magenta
-            background="1d2021",
+            border_width=[0, 0, 0, 0], 
+            border_color=["7c6f64", "7c6f64", "7c6f64", "7c6f64"], 
+            background="191919",
         ),
     ),
 ]
