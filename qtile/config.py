@@ -134,7 +134,7 @@ def init_layout_theme():
         "margin":0,
         "border_width":1,
         "border_focus":"#9c64fe",
-        "border_normal":"#333333"
+        "border_normal":"#191919"
     }
 
 layout_theme = init_layout_theme()
@@ -144,7 +144,7 @@ def init_layout_theme2():
         "margin":20,
         "border_width":1,
         "border_focus":"#9c64fe",
-        "border_normal":"#333333"
+        "border_normal":"#343434"
     }
 
 layout_theme2 = init_layout_theme2()
@@ -179,7 +179,8 @@ extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-    	wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-eOc8hiK_Z68-unsplash.jpg',
+    	# wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-eOc8hiK_Z68-unsplash.jpg',
+    	wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-E4gghSrMtdw-unsplash.jpg',
     	wallpaper_mode='fill',
         bottom=bar.Bar(
             
@@ -196,7 +197,7 @@ screens = [
                 ),
                 widget.WindowName(max_chars=50,empty_group_string='Mint'),
                 widget.Spacer(),
-                widget.Clock(format=datee + " %a, %b %d, %Y | %I:%M %p"),
+                widget.Clock(format=datee + " %a, %b %d, %Y | %I:%M:%S %p"),
                 widget.Spacer(),
                 # widget.Battery(),
                 widget.Memory(measure_mem='G', format='Mem: {MemUsed: .1f} GB'),
@@ -204,8 +205,8 @@ screens = [
                 # widget.Systray(),
                 # 🟡
                 # 🔴
-                widget.QuickExit(fontsize=10, default_text='Logout', countdown_format='{}', padding=2),
-                widget.LaunchBar(fontsize=12, text_only=True, padding=2, progs=[('⏻︎', 'systemctl suspend', 'Suspend system using Systemd')]),
+                widget.QuickExit(fontsize=10, default_text='🔴', countdown_format='{}', padding=2),
+                widget.LaunchBar(fontsize=10, text_only=True, padding=2, progs=[('🟡', 'systemctl suspend', 'Suspend system using Systemd')]),
             ],
             24,
             border_width=[0, 0, 0, 0], 
