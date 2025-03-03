@@ -90,7 +90,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vi'
+  export EDITOR='micro'
 else
   export EDITOR='nvim'
 fi
@@ -116,20 +116,30 @@ export PATH="$PATH:$(yarn global bin)"
 export PATH="$PATH:/Users/anar/.local/bin"
 alias love="/Applications/love.app/Contents/MacOS/love"
 # alias python="/opt/homebrew/bin/python3"
-alias python="/usr/bin/python3"
+# alias python="/usr/bin/python3"
+alias penv="source .venv/bin/activate"
 alias see="bat -P --theme base16"
 alias edit="micro"
 alias sql="mycli -u root -R '$fg[yellow]\u:\d ➤ '"
 alias tree="tree -I env"
 alias music="musikcube"
 alias l="gols -c -s -T"
+alias la="gols -c -s -T -a"
 alias clock="Developer/clock/env/bin/python3 Developer/clock/clock.py"
 alias tt="tt -notheme -quotes en"
+alias cs="cd /Users/anar/Developer/cs310/cs310-Group-Project"
 alias icloud="cd /Users/anar/Library/Mobile\ Documents"
 alias ytdl="yt-dlp --config-locations '/Users/anar/yt-dlp/config'"
 alias gpnr="git pull --no-rebase"
-alias pip="pip3"
+# alias pip="pip3"
+alias math="cd /Users/anar/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/DKU-iCloud/MATH_202"
+alias vpnc="/opt/cisco/anyconnect/bin/vpn -s < vpn.conf"
+alias vpn="sudo /opt/cisco/anyconnect/bin/vpn"
+alias nv="nvim"
+alias clocc="tty-clock -d 0.5 -s -c -t"
 export PATH="$PATH:/Users/anar/Library/Python/3.9/bin"
+export BAT_THEME="base16"
+alias icat="kitten icat"
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/anar/Developer/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -170,3 +180,13 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+alias vpnc="/opt/cisco/anyconnect/bin/vpn -s < /Users/anar/.config/vpnc.conf"
+alias vpnd="/opt/cisco/anyconnect/bin/vpn disconnect"
+alias vpni="/opt/cisco/anyconnect/bin/vpn"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
