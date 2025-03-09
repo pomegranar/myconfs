@@ -240,6 +240,13 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ], **layout_theme
 )
+
+from libqtile import hook
+@hook.subscribe.startup
+def runner():
+    import subprocess
+    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
