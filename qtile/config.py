@@ -24,16 +24,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from libqtile import bar, layout, widget
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.utils import guess_terminal
+# from libqtile.utils import guess_terminal
 from libqtile import extension
+import subprocess
 import time
+# import os
+
+@hook.subscribe.startup
+def autostart():
+    for cmd in [
+            ["gnome-keyring-daemon", "--start", "--components=pkcs11,secrets,ssh,gpg"],
+            ["clipmenud"],
+            ["dunst"],
+            # ["redshift", "-v", "-l", "31.37762:120.95431"],
+            # ["picom", "--experimental-backends", "--log-level", "warn", "--config", os.path.expanduser("~/.config/picom.conf")],
+            ]:
+        subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    # subprocess.Popen([home])
+    subprocess.Popen(['setxkbmap', '-option', 'caps:swapescape'])
+
 
 datee = " ♥"+str(int((time.time() - 1665259365) // 86400 +1))+"♥ "
 mod = "mod4"
-terminal = "kitty"
+terminal = "alacritty"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -43,7 +59,6 @@ keys = [
     Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
@@ -70,14 +85,18 @@ keys = [
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
-    Key([mod], "f", lazy.spawn("nautilus"), desc="Launch Files"),
-    Key([mod], "space", lazy.spawn("rofi -show run"), desc="Launch rofi launcher"),
+    Key([mod], "f", lazy.spawn("nemo"), desc="Launch Files"),
+    Key([mod], "space", lazy.spawn("rofi -show drun"), desc="Launch rofi launcher"),
+    Key([mod], "v", lazy.spawn("clipmenu"), desc="Clipmenu chooser"), 
     Key([mod], "b", lazy.spawn("microsoft-edge"), desc="Launch browser"),
-    Key([mod, "shift"], "l", lazy.spawn("gnome-screensaver-command --lock"), desc="Lock using gnome-screensaver"),
+    # Key([mod, "shift"], "l", lazy.spawn("gnome-screensaver-command --lock"), desc="Lock using gnome-screensaver"),
+    Key([mod, "shift"], "l", lazy.spawn("dm-tool lock"), desc="Lock using lightdm"),
     Key([mod, "shift"], "f", lazy.window.toggle_fullscreen(), desc="toggle fullscreen"),
     Key([mod], "m", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
+    Key(["mod1", "shift"], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key(["mod1", "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod, "shift"], "s", lazy.spawn('shutter -s -e')),
@@ -96,9 +115,14 @@ keys = [
         selected_foreground="#fff",
         dmenu_height=24,  # Only supported by some dmenu forks
     ))),
-]
-
+    Key([mod], "Tab", lazy.layout.next(), desc="Focus next window in group"),
+    Key([mod, "shift"], "Tab", lazy.layout.previous(), desc="Focus previous window in group"),
+    Key(["mod1"], "Tab", lazy.layout.next(), desc="Focus next window in group"),
+    Key(["mod1", "shift"], "Tab", lazy.layout.previous(), desc="Focus previous window in group"),   ]
+# cat = '\udb80\udd1b'
+names = ["Dev","Edge","Notion","Outlook"]
 groups = [Group(i) for i in "123456789"]
+
 
 for i in groups:
     keys.extend(
@@ -133,18 +157,22 @@ def init_layout_theme():
     return{
         "margin":0,
         "border_width":1,
-        "border_focus":"#9c64fe",
-        "border_normal":"#191919"
+        # "border_width":0,
+        "border_focus":"#928374",
+        "border_normal":"#282828",
+        "wrap_focus_columns":"False",
+        "wrap_focus_rows":"False",
     }
 
 layout_theme = init_layout_theme()
 
 def init_layout_theme2():
     return{
-        "margin":20,
+        "margin":30,
         "border_width":1,
-        "border_focus":"#9c64fe",
-        "border_normal":"#343434"
+        # "border_width":0,
+        "border_focus":"#928374",
+        "border_normal":"#282828"
     }
 
 layout_theme2 = init_layout_theme2()
@@ -152,8 +180,8 @@ layout_theme2 = init_layout_theme2()
 
 layouts = [
     layout.Columns(**layout_theme),
-    layout.Max(),
     layout.Columns(**layout_theme2),
+    layout.Max(margin=0),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -170,48 +198,66 @@ layouts = [
 
 
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Mono",
-    fontsize=13,
+    # font="JetBrainsMono Nerd Font Mono",
+    font="FantasqueSansM Nerd Font",
+    fontsize=16,
     padding=10,
-    foreground="#c4c4b5"
+    foreground="#ebdbb2"
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
     	# wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-eOc8hiK_Z68-unsplash.jpg',
-    	wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-E4gghSrMtdw-unsplash.jpg',
+    	# wallpaper='~/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-E4gghSrMtdw-unsplash.jpg',
+    	# wallpaper='~/Pictures/walls/SNT0031.png',               # dark green flower pattern
+    	# wallpaper='~/Pictures/walls/iridescent-06.JPG',   # Wave thing
+    	# wallpaper='~/Downloads/NHQ201708210100~orig.tif', # Eclipse
+        # wallpaper='/home/dart/Pictures/walls/arnaud-girault-IjEtFjxXweE-unsplash.jpg',
+        # wallpaper='/home/dart/Pictures/walls/dynamic-wang-rQ014iEDx8Y-unsplash.jpg',
+        # wallpaper='/home/dart/Developer/myconfs/gruv-wallpapers/0CB7BBC1-B856-428F-BEE7-31D50768653F.JPG',
+        # wallpaper='/home/dart/Developer/myconfs/gruv-wallpapers/choco.jpg', 
+        wallpaper='/home/dart/Developer/myconfs/art-wallpapers/the-cleveland-museum-of-art-2MlJ3rI827U-unsplash.jpg',
     	wallpaper_mode='fill',
         bottom=bar.Bar(
             
             [
-                widget.GroupBox(highlight_method='line', borderwidth=3, padding=3, this_current_screen_border="#9c64fe", disable_drag=True, highlight_color=["#282828","#343832"], urgent_border="#fb4934", urgent_text="#f3005f", foreground="#1E313D", hide_unused=True),
+                widget.LaunchBar(fontsize=20, text_only=True, padding=0, progs=[('󰣭', 'rofi -show drun', 'Open Rofi menu')]),
+                widget.GroupBox(highlight_method='line', borderwidth=3, padding=3, this_current_screen_border="#98971a", disable_drag=True, highlight_color=["#282828","#282828"], urgent_border="#fb4934", urgent_text="#f3005f", foreground="#ebdbb2", hide_unused=True),
                 widget.CurrentLayout(),
-                widget.Prompt(font="JetBrainsMono Nerd Font Mono"),
+                # widget.CurrentLayoutIcon(),
+                widget.Prompt(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ff00ff"),
                     },
-                    font="JetBrainsMono Nerd Font Mono",
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.WindowName(max_chars=50,empty_group_string='Mint'),
+                widget.WindowName(max_chars=80,empty_group_string='Mint'),
                 widget.Spacer(),
-                widget.Clock(format=datee + " %a, %b %d, %Y | %I:%M:%S %p"),
+                # widget.Clock(format=datee + " %a, %b %d, %Y | %I:%M:%S %p"),
+                widget.Clock(format="%a, %b %d, %Y | %I:%M:%S %p"),
                 widget.Spacer(),
                 # widget.Battery(),
-                widget.Memory(measure_mem='G', format='Mem: {MemUsed: .1f} GB'),
+                # widget.Countdown(),
+                widget.Memory(measure_mem='G', format='RAM{MemUsed: .1f} GB'),
+                widget.CPU(),
                 widget.Volume(fmt='Vol: {}', update_interval=0.01),
-                # widget.Systray(),
+                # widget.Systray(padding=4),
                 # 🟡
                 # 🔴
-                widget.QuickExit(fontsize=10, default_text='🔴', countdown_format='{}', padding=2),
-                widget.LaunchBar(fontsize=10, text_only=True, padding=2, progs=[('🟡', 'systemctl suspend', 'Suspend system using Systemd')]),
+                widget.QuickExit(fontsize=16, default_text='', countdown_format='{}', padding=8),
+                widget.LaunchBar(fontsize=19, text_only=True, padding=3, progs=[('󰤁', 'systemctl suspend', 'Suspend system using Systemd')]),
             ],
-            24,
+            30,
+            # border_width=[2, 2, 2, 2], 
             border_width=[0, 0, 0, 0], 
+            # margin=[0, 10, 10, 10],
+            # margin=[8, 8, 8, 8],
+            margin=[0, 0, 0, 0],
             border_color=["7c6f64", "7c6f64", "7c6f64", "7c6f64"], 
-            background="191919",
+            # background="202020e0",
+            background="282828",
         ),
     ),
 ]

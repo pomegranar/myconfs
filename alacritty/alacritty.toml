@@ -1,0 +1,48 @@
+import = ["/home/dart/.config/alacritty/colors/Soda.toml"]
+
+
+[bell]
+animation = "EaseOutExpo"
+duration = 100
+color = "#303030"
+command = "None"
+
+[cursor]
+blink_interval = 750
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[font]
+size = 10.0
+
+[font.bold]
+# family = "Terminess Nerd Font"
+family = "FantasqueSansM Nerd Font"
+
+[font.bold_italic]
+family = "FantasqueSansM Nerd Font"
+
+[font.italic]
+family = "FantasqueSansM Nerd Font"
+
+[font.normal]
+# family = "Victor Mono Nerd Font"
+family = "FantasqueSansM Nerd Font"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+
+[window]
+decorations = "full"
+dynamic_padding = false
+opacity = 0.8
+
+[window.padding]
+x = 0
+y = 0
