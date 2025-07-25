@@ -10,4 +10,5 @@ return {
   { import = "astrocommunity.colorscheme.monokai-pro-nvim" },
   { import = "astrocommunity.colorscheme.gruvbox-baby" },
   { import = "astrocommunity.colorscheme.everforest" },
+  { import = "astrocommunity.colorscheme.vscode-nvim" },
 }

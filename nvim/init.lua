@@ -13,7 +13,7 @@ if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   end
 end
 
--- vim.g.gruvbox_baby_transparent_mode = 1
+vim.g.gruvbox_baby_transparent_mode = 1
 vim.opt.rtp:prepend(lazypath)
 
 -- validate that lazy is available
